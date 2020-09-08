@@ -84,7 +84,9 @@ client.on('message', async (message) => {
             break;
 
         case "display-board":
-            await cmdOrchestratorCommand(message, args).catch(err=>{
+            await cmdOrchestratorCommand(message, args).then(r=>{
+                return r;
+            }).catch(err=>{
                 return err;
             });
             break;
