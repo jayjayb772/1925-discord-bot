@@ -17,8 +17,8 @@ async function cmdOrchestratorCommand(message, args){
         }
         console.log(options)
 
-
-        request.post(`${url()}discord/discord-command`, options, (err, res) => {
+        let uri = url()
+        request.post(`${uri}discord/discord-command`, options, (err, res) => {
             console.log(res)
             console.log(err)
             if(res.body.statusCode != 200){
