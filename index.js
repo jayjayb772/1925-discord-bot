@@ -1,7 +1,7 @@
 const {MessageEmbed, Client} = require("discord.js");
 require('dotenv').config();
 const https = require('https');
-const {cmdText} = require("./commands/src/cmdText");
+const {cmdOrchestratorCommand} = require("./commands/src/cmdOrchestratorCommand");
 
 
 //const Twit = require('twit');
@@ -83,8 +83,10 @@ client.on('message', async (message) => {
             await help(message, args);
             break;
 
-        case "text":
-            await cmdText(message);
+        case "display-board":
+            await cmdOrchestratorCommand(message, args).catch(err=>{
+                return err;
+            });
             break;
 
         case "residents":
@@ -93,9 +95,11 @@ client.on('message', async (message) => {
 
         case "bug":
             await reportBug(message, convertTimestamp(message.createdTimestamp));
+            break;
 
         case "poll":
             await poll(message, args);
+            break;
 
         case "NO_CMD":
             break;
