@@ -28,6 +28,8 @@ async function cmdOrchestratorCommand(message, args){
         }
 
         request.post(`${url}discord/discord-command`, options, (err, res) => {
+            console.log(res)
+            console.log(err)
             if(res.body.statusCode != 200){
                 console.log(res);
                 reject(res)
