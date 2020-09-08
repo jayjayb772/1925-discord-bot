@@ -5,29 +5,41 @@ const { MessageEmbed , Client} = require("discord.js");
 async function cmdOrchestratorCommand(message, args){
 
     return new Promise(function (resolve, reject) {
-        let body = JSON.stringify({
-            "cmd":args[0],
-            "extra":args.slice(1)
-        })
-        let options = {
-            "headers": {
-                "content-type": "application/json"
-            },
-            "body": body
-        }
-        console.log(options)
+        handleCommand(args[0], args.slice(1), resolve, reject)
+    })
+}
 
-        let uri = url()
-        request.post(`${uri}discord/discord-command`, options, (err, res) => {
-            console.log(res)
-            console.log(err)
-            if(res.body.statusCode != 200){
-                console.log(res);
-                reject(res)
-            }
-            console.log(res)
-            resolve(res)
-        })
+function handleCommand(cmd, args, resolve, reject){
+    switch (cmd) {
+        case 'text':
+            return
+        default:
+            sendInfo(cmd, args, resolve, reject)
+
+    }
+}
+
+function sendInfo(cmd, args, resolve, reject){
+    let body = JSON.stringify({
+        "cmd":args[0],
+        "extra":args.slice(1)
+    })
+    let options = {
+        "headers": {
+            "content-type": "application/json"
+        },
+        "body": body
+    }
+    console.log(options)
+
+    let uri = url()
+    request.post(`${uri}discord/discord-command`, options, (err, res) => {
+        if(res.body.statusCode != 200){
+            console.log(res);
+            reject(res)
+        }
+        console.log(res)
+        resolve(res)
     })
 }
 

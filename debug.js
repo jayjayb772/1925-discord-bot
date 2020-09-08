@@ -1,8 +1,8 @@
 
-const consoleDebug = function(str){
-    if(process.env.debug === "on"){
+function consoleDebug(str){
+    if(process.env.DEBUG){
         console.log(str);
     }
-};
+}
 
 module.exports = {consoleDebug};
