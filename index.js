@@ -1,5 +1,5 @@
 const {MessageEmbed, Client} = require("discord.js");
-const {config} = require("dotenv");
+require('dotenv').config();
 const https = require('https');
 
 
@@ -10,11 +10,9 @@ const {welcome} = require("./commands/src/welcomeAcknowledge");
 //Commands
 const {quote} = require('./commands/src/cmdQuote.js');
 const {notFunctional, notCMD} = require("./commands/src/cmdErrors");
-const {help, site} = require("./commands/src/cmdHelp");
-const {hours} = require("./commands/src/cmdHours");
+const {help} = require("./commands/src/cmdHelp");
 const {say} = require("./commands/src/cmdSay");
-const {staff} = require("./commands/src/cmdStaff");
-const {machines} = require("./commands/src/cmdMachines");
+const {residents} = require("./commands/src/cmdResidents");
 const {reportBug} = require("./commands/src/cmdBug");
 const {checkMessage} = require("./commands/src/automodFeatures");
 //const {collectPic} = require("./commands/src/petPicCollector");
@@ -25,9 +23,6 @@ const client = new Client({
 
 
 
-config({
-    pah: __dirname + "/.env"
-});
 
 client.on("ready", async () => {
     console.log(`I am online, my name is ${client.user.username}`);
@@ -35,15 +30,14 @@ client.on("ready", async () => {
         await client.user.setActivity(`bugs run rampant`, {type: "WATCHING"});
         //client.guilds.cache.first().channels.cache.filter(channel => channel.id === process.env.onlineChannel).first().send(`Newly updated!`).then(r => r.delete({timeout: 5000}));
     } else {
-        await client.user.setActivity(`irl!help`, {type: "PLAYING"});
+        await client.user.setActivity(`1925!help`, {type: "PLAYING"});
     }
 });
 
 
-
 client.on('guildMemberAdd', (member )=>{
    console.log(`New member: ${member.user.tag}`);
-    //welcome(member);
+    welcome(member).then(r => {return});
 });
 
 client.on('warn', function(info){
@@ -52,7 +46,7 @@ client.on('warn', function(info){
 
 
 client.on('message', async (message) => {
-    const prefix = "irl!";
+    const prefix = "1925!";
     if(message.author.bot) return;
 
     if (!message.guild) return;
@@ -76,10 +70,6 @@ client.on('message', async (message) => {
 
 
     switch (cmd) {
-        case "hours":
-            await hours(message, args);
-            break;
-
         case "say":
             await say(message, args, process.env.environment);
             break;
@@ -92,24 +82,8 @@ client.on('message', async (message) => {
             await help(message, args);
             break;
 
-        case "site":
-            await site(message);
-            break;
-
-        case "machines":
-            await machines(message);
-            break;
-
-        case "software":
-            await notFunctional(message);
-            break;
-
-        case "staff":
-            await staff(message, args, process.env.environment);
-            break;
-
-        case "upcoming":
-            await notFunctional(message);
+        case "residents":
+            await residents(message, args, process.env.environment);
             break;
 
         case "bug":
