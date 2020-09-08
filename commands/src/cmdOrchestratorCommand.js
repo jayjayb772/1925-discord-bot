@@ -21,8 +21,8 @@ function handleCommand(cmd, args, resolve, reject){
 
 function sendInfo(cmd, args, resolve, reject){
     let body = JSON.stringify({
-        "cmd":args[0],
-        "extra":args.slice(1)
+        "cmd":cmd,
+        "extra":args
     })
     let options = {
         "headers": {
