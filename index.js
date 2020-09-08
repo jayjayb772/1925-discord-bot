@@ -1,6 +1,7 @@
 const {MessageEmbed, Client} = require("discord.js");
 require('dotenv').config();
 const https = require('https');
+const {cmdText} = require("./commands/src/cmdText");
 
 
 //const Twit = require('twit');
@@ -82,6 +83,10 @@ client.on('message', async (message) => {
             await help(message, args);
             break;
 
+        case "text":
+            await cmdText(message);
+            break;
+
         case "residents":
             await residents(message, args, process.env.environment);
             break;
@@ -95,41 +100,6 @@ client.on('message', async (message) => {
         case "NO_CMD":
             break;
 
-        case "play":
-            if (message.channel.id === process.env.musicListener) {
-                await notFunctional(message)
-            } else {
-                await message.channel.send("Cannot use previous command in this channel").then(r => r.delete({timeout: 5000}))
-            }
-            message.delete();
-            break;
-
-        case "skip":
-            if (message.channel.id === process.env.musicListener) {
-                await notFunctional(message)
-            } else {
-                await message.channel.send("Cannot use previous command in this channel").then(r => r.delete({timeout: 5000}))
-            }
-            message.delete();
-            break;
-
-        case "pause":
-            if (message.channel.id === process.env.musicListener) {
-                await notFunctional(message)
-            } else {
-                await message.channel.send("Cannot use previous command in this channel").then(r => r.delete({timeout: 5000}))
-            }
-            message.delete();
-            break;
-
-        case "stop":
-            if (message.channel.id === process.env.musicListener) {
-                await notFunctional(message)
-            } else {
-                await message.channel.send("Cannot use previous command in this channel").then(r => r.delete({timeout: 5000}))
-            }
-            message.delete();
-            break;
         default:
             await notCMD(message);
     }

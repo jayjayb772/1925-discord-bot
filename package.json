@@ -31,6 +31,7 @@
     "mocha": "^7.1.1",
     "node-emoji": "^1.10.0",
     "request": "latest",
+    "requests": "^0.3.0",
     "twit": "^2.2.11"
   },
   "devDependencies": {
