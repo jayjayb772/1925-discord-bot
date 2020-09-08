@@ -27,14 +27,12 @@ async function cmdOrchestratorCommand(message, args){
             }
         }
 
-        await request.post(`${url}discord/discord-command`, options, async function(res, err) {
+        await request.post(`${url}discord/discord-command`, options, (err, res) => {
             if(res.body.statusCode != 200){
                 reject(res)
             }
             console.log(res)
             resolve(res)
-        }).catch(err=>{
-            reject(err)
         })
     })
 }
