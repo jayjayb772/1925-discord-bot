@@ -85,8 +85,10 @@ client.on('message', async (message) => {
 
         case "display-board":
             cmdOrchestratorCommand(message, args).then(r=>{
+                console.log(r);
                 return r;
             }).catch(err=>{
+                console.log(err)
                 return err;
             });
             break;
