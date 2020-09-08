@@ -16,8 +16,18 @@ async function cmdOrchestratorCommand(message, args){
             "body": body
         }
         console.log(options)
+        let url =function(){
+            switch (process.env.environment) {
+                case 'dev':
+                    return process.env.local_orchestrator_url
+                case 'prod':
+                    return process.env.prod_orchestrator_url
+                default:
+                    return process.env.prod_orchestrator_url
+            }
+        }
 
-        await request.post(`${process.env.local_orchestrator_url}discord/discord-command`, options, (err, res) => {
+        await request.post(`${url}discord/discord-command`, options, (err, res) => {
             if(res.body.statusCode != 200){
                 reject(res)
             }
