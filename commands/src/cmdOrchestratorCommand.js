@@ -33,6 +33,8 @@ async function cmdOrchestratorCommand(message, args){
             }
             console.log(res)
             resolve(res)
+        }).catch(err=>{
+            reject(err)
         })
     })
 }
