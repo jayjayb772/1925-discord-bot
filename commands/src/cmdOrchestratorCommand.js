@@ -4,7 +4,7 @@ const { MessageEmbed , Client} = require("discord.js");
 
 async function cmdOrchestratorCommand(message, args){
 
-    return new Promise(async function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         let body = JSON.stringify({
             "cmd":args[0],
             "extra":args.slice(1)
@@ -27,7 +27,7 @@ async function cmdOrchestratorCommand(message, args){
             }
         }
 
-        await request.post(`${url}discord/discord-command`, options, (res, err) => {
+        request.post(`${url}discord/discord-command`, options, (res, err) => {
             if(res.body.statusCode != 200){
                 reject(res)
             }
