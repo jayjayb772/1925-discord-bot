@@ -31,6 +31,7 @@ async function handleCommand(cmd, args, message, resolve, reject) {
 
 async function trainTimes(station, color, message) {
     return new Promise(function (resolve, reject) {
+        try{
         station = station.charAt(0).toUpperCase() + station.slice(1)
         color = color.charAt(0).toUpperCase() + color.slice(1)
         let uri = `${url()}discord/train-times?name=${station}&color=${color}`
@@ -38,17 +39,21 @@ async function trainTimes(station, color, message) {
             if (err) {
                 reject(message.channel.send("There was an error").then(m => m.delete({timeout: 10000})));
             } else {
-
                 let a = JSON.parse(res.body);
                 console.log(a);
                 const trainsMsg = new MessageEmbed().setTitle("Trains!").setColor(a["Train 1"].colorHex)
-                for (let [trainName,trainObj] of Object.entries(a)) {
+                for (let [trainName, trainObj] of Object.entries(a)) {
                     trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)
                 }
-                resolve(message.channel.send(trainsMsg).then(m=>{m.delete({timeout:20000})
-                message.delete()}))
+                resolve(message.channel.send(trainsMsg).then(m => {
+                    m.delete({timeout: 20000})
+                    message.delete()
+                }))
             }
         })
+    }catch(err){
+            reject(message.channel.send("There was an error").then(m => m.delete({timeout: 10000})))
+        }
     })
 }
 
