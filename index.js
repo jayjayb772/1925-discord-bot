@@ -1,7 +1,8 @@
 const {MessageEmbed, Client} = require("discord.js");
 require('dotenv').config();
 const https = require('https');
-const {cmdOrchestratorCommand, trainHandler} = require("./commands/src/cmdOrchestratorCommand");
+const {trainHandler} = require("./commands/src/cmdCta");
+const {cmdOrchestratorCommand} = require("./commands/src/cmdOrchestratorCommand");
 
 
 //const Twit = require('twit');
