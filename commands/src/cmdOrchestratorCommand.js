@@ -68,8 +68,8 @@ async function montrose(message) {
                 let a = JSON.parse(res.body);
                 console.log(a);
                 const trainsMsg = new MessageEmbed().setTitle("Trains!").setColor(a["Train 1"].colorHex)
-                for (let [trainName,trainObj] of Object.entries(a)) {
-                    trainsMsg.addField(`${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)
+                for (let [trainName, trainObj] of Object.entries(a)) {
+                    trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)
                 }
                 resolve(message.channel.send(trainsMsg).then(m=>{m.delete({timeout:20000})
                     message.delete()}))
