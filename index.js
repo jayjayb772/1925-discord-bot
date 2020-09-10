@@ -1,7 +1,7 @@
 const {MessageEmbed, Client} = require("discord.js");
 require('dotenv').config();
 const https = require('https');
-const {cmdOrchestratorCommand} = require("./commands/src/cmdOrchestratorCommand");
+const {cmdOrchestratorCommand, trainHandler} = require("./commands/src/cmdOrchestratorCommand");
 
 
 //const Twit = require('twit');
@@ -85,6 +85,15 @@ client.on('message', async (message) => {
 
         case "display-board":
             cmdOrchestratorCommand(message, args).then(r=>{
+                console.log(r);
+                return r;
+            }).catch(err=>{
+                console.log(err)
+                return err;
+            });
+            break;
+        case "cta":
+            trainHandler(message, args).then(r=>{
                 console.log(r);
                 return r;
             }).catch(err=>{
