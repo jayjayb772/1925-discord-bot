@@ -11,7 +11,7 @@ const helpmsg = new MessageEmbed().setTitle("List of commands").setColor(2762596
                                                                 .addField("quote", "Gets quote from [Adafruit quote api](adafruit.com/quotes.php)",false)
                                                                 .addField("residents", "Lists staff online, use role to specify specialties", false)
                                                                 .addField("display-board (cmd) [args]", "communicate with the display board orchestrator", false)
-                                                                .addField("trains (stop) [color]", "Used without a station and color will return trains at Montrose", false)
+                                                                .addField("cta (stop) [color]", "Used without a station and color will return trains at Montrose", false)
                                                                 .addField("bug (report)", "Sends a message directly to person in charge of bot to easily get bug reports", false )
                                                                 .addField("help", "Lists all functional commands", false)
                                                                 .setURL("https://github.com/jayjayb772/discord-bot");
