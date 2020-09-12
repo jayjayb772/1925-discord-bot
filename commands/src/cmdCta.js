@@ -38,7 +38,7 @@ async function makeRequest(uri, station, color, message, resolve, reject) {
             let count = 1;
             for (let [trainName, trainObj] of Object.entries(a)) {
                 const trainsMsg = new MessageEmbed().setTitle(`Train #${count} at ${trainObj["where"]}!`).setColor(trainObj["colorHex"])
-                message.send(trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)).then(m =>m.delete({timeout: 20000}))
+                message.channel.send(trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)).then(m =>m.delete({timeout: 20000}))
                 count+=1;
             }
             resolve("Sent!")
