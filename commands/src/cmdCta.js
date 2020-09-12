@@ -40,9 +40,11 @@ async function makeRequest(uri, station, color, message, resolve, reject) {
                 const trainsMsg = new MessageEmbed().setTitle(`Train #${count} at ${trainObj["where"]}!`).setColor(trainObj["colorHex"])
                 message.channel.send(trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)).then(m =>{
                     m.delete({timeout: 20000})
-                    message.delete()
                 })
                 count+=1;
+            }
+            if (message.deletable){
+                message.delete()
             }
             resolve("Sent!")
         }
