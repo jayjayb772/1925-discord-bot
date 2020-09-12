@@ -28,7 +28,10 @@ async function makeRequest(uri, station, color, message, resolve, reject) {
     request.get(uri, (err, res) => {
         if (err) {
             debuglog(err)
-            reject(message.channel.send("There was an error").then(m => m.delete({timeout: 10000})));
+            reject(message.channel.send("There was an error").then(m => {
+                m.delete({timeout: 20000})
+                message.delete()
+            }));
         } else {
             let a = JSON.parse(res.body);
             debuglog(a);
