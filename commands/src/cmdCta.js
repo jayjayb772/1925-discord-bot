@@ -7,7 +7,7 @@ async function trainTimes(station, color, message) {
         try {
             station = station.charAt(0).toUpperCase() + station.slice(1)
             color = color.charAt(0).toUpperCase() + color.slice(1)
-            let uri = `${url()}discord/train-times?name=${station}&color=${color}`
+            let uri = `${url()}cta/train-times?name=${station}&color=${color}`
             makeRequest(uri, station, color, message, resolve, reject)
         } catch (err) {
             reject(message.channel.send("There was an error").then(m => m.delete({timeout: 10000})))
