@@ -18,7 +18,7 @@ async function trainTimes(station, color, message) {
 
 async function montrose(message) {
     return new Promise(function (resolve, reject) {
-        let uri = `${url()}discord/train-times`
+        let uri = `${url()}cta/train-times`
         makeRequest(uri, "Montrose", "Brown", message, resolve, reject)
     })
 }
