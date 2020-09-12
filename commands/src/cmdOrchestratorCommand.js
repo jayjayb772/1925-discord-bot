@@ -1,5 +1,6 @@
 const request = require('request');
 const https = require("request");
+const {debuglog} = require("../utils/debugCommands");
 const {url} = require("../utils/url.js");
 async function cmdOrchestratorCommand(message, args) {
 
@@ -39,7 +40,7 @@ function displayMessage(cmd, args, message, resolve, reject) {
         "roles": message.author.toJSON()
     })
     let options = options(body)
-    console.log(options)
+    debuglog(options)
 
     let uri = url()
     request.post(`${uri}discord/display-message`, options, (err, res) => {
@@ -58,7 +59,7 @@ function sendInfo(cmd, args, resolve, reject) {
         "extra": args
     })
     let options = options(body)
-    console.log(options)
+    debuglog(options)
 
     let uri = url()
     request.post(`${uri}discord/discord-command`, options, (err, res) => {

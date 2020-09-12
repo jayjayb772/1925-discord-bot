@@ -1,4 +1,5 @@
 const request = require("request");
+const {debuglog} = require("../utils/debugCommands");
 const {url} = require("../utils/url.js");
 const {MessageEmbed, Client} = require("discord.js");
 
@@ -26,10 +27,11 @@ async function montrose(message) {
 async function makeRequest(uri, station, color, message, resolve, reject) {
     request.get(uri, (err, res) => {
         if (err) {
+            debuglog(err)
             reject(message.channel.send("There was an error").then(m => m.delete({timeout: 10000})));
         } else {
             let a = JSON.parse(res.body);
-            console.log(a);
+            debuglog(a);
             const trainsMsg = new MessageEmbed().setTitle(`Trains at ${a["Train 1"].where}!`).setColor(a["Train 1"].colorHex)
             for (let [trainName, trainObj] of Object.entries(a)) {
                 trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)
