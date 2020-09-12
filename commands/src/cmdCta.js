@@ -35,14 +35,13 @@ async function makeRequest(uri, station, color, message, resolve, reject) {
         } else {
             let a = JSON.parse(res.body);
             debuglog(a);
-            const trainsMsg = new MessageEmbed().setTitle(`Trains at ${a["Train 1"].where}!`).setColor(a["Train 1"].colorHex)
+            let count = 1;
             for (let [trainName, trainObj] of Object.entries(a)) {
-                trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)
+                const trainsMsg = new MessageEmbed().setTitle(`Train #${count} at ${trainObj["where"]}!`).setColor(trainObj["colorHex"])
+                message.send(trainsMsg.addField(`${trainObj["color"]} Line, ${trainObj["dest"]} in ${trainObj["eta"]}`, `A ${trainObj["color"]} Line train to ${trainObj["dest"]} is arriving at ${trainObj["where"]} in ${trainObj["eta"]}`, false)).then(m =>m.delete({timeout: 20000}))
+                count+=1;
             }
-            resolve(message.channel.send(trainsMsg).then(m => {
-                m.delete({timeout: 20000})
-                message.delete()
-            }))
+            resolve("Sent!")
         }
     })
 }
