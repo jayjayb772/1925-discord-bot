@@ -158,8 +158,9 @@ function convertTimestamp(timestamp, offset = -6) {
     return nd.toLocaleString();
 }
 
+console.log(`${process.env.Discord_Token}`);
 
-client.login(process.env.TOKEN).catch((error) => {
+client.login(`${process.env.Discord_Token}`).catch((error) => {
     console.log(error);
 });
 
