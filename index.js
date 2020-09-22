@@ -3,7 +3,6 @@ require('dotenv').config();
 const https = require('https');
 const {trainHandler} = require("./commands/src/cmdCta");
 const {cmdOrchestratorCommand} = require("./commands/src/cmdOrchestratorCommand");
-require('./app');
 
 
 //const Twit = require('twit');
@@ -47,13 +46,14 @@ client.on('guildMemberAdd', (member )=>{
 client.on('warn', function(info){
     console.log(info);
 })
-console.log(`${process.env.sockJsURL}websocket`)
-const sock = new SockJS(`${process.env.sockJsURL}websocket`);
+console.log(`${process.env.sockJsURL}`)
+const sock = new SockJS(`${process.env.sockJsURL}`);
+console.log("opening")
 sock.onopen = function() {
     console.log('open');
     sock.send('test');
 };
-
+console.log('on message')
 sock.onmessage = function(e) {
     console.log('message', e.data);
 };
@@ -158,9 +158,9 @@ function convertTimestamp(timestamp, offset = -6) {
     return nd.toLocaleString();
 }
 
-console.log(`${process.env.Discord_Token}`);
+console.log(`${process.env.TOKEN}`);
 
-client.login(`${process.env.Discord_Token}`).catch((error) => {
+client.login(process.env.TOKEN).catch((error) => {
     console.log(error);
 });
 

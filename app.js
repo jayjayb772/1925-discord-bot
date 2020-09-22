@@ -1,4 +1,4 @@
-const http = require('http');
+const https = require('https');
 const express = require('express');
 const sockjs = require('sockjs');
 const clients=[]
@@ -17,6 +17,6 @@ echo.on('connection', function(conn) {
 });
 
 
-const server = http.createServer();
+const server = https.createServer();
 echo.installHandlers(server);
 server.listen(process.env.WEBSOCKET_PORT, '0.0.0.0');
