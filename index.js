@@ -3,12 +3,14 @@ require('dotenv').config();
 const https = require('https');
 const {trainHandler} = require("./commands/src/cmdCta");
 const {cmdOrchestratorCommand} = require("./commands/src/cmdOrchestratorCommand");
+require('./app');
 
 
 //const Twit = require('twit');
 const {poll} = require("./commands/src/cmdPoll");
 const {welcome} = require("./commands/src/welcomeAcknowledge");
-
+const SockJS = require('sockjs-client');
+const {sendToOrch} = require("./commands/src/sendToOrch");
 //Commands
 const {quote} = require('./commands/src/cmdQuote.js');
 const {notFunctional, notCMD} = require("./commands/src/cmdErrors");
@@ -45,6 +47,20 @@ client.on('guildMemberAdd', (member )=>{
 client.on('warn', function(info){
     console.log(info);
 })
+console.log(`${process.env.sockJsURL}websocket`)
+const sock = new SockJS(`${process.env.sockJsURL}websocket`);
+sock.onopen = function() {
+    console.log('open');
+    sock.send('test');
+};
+
+sock.onmessage = function(e) {
+    console.log('message', e.data);
+};
+
+sock.onclose = function() {
+    console.log('close');
+};
 
 
 client.on('message', async (message) => {
@@ -56,6 +72,17 @@ client.on('message', async (message) => {
 
     if (message.content.startsWith(prefix) && !message.author.bot) {
         console.log(`${message.author.username} said ${message.content}`);
+    }
+
+    console.log(`channel id: ${message.channel.id}`)
+    console.log(`display channel: ${process.env.DisplayChannel}`)
+    if(message.channel.id === process.env.DisplayChannel){
+        let data = {
+            message:message.content,
+            from:message.author.username
+        }
+        sock.send(JSON.stringify(data))
+        console.log('sent message')
     }
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -135,27 +162,6 @@ function convertTimestamp(timestamp, offset = -6) {
 client.login(process.env.TOKEN).catch((error) => {
     console.log(error);
 });
-
-/*
-
-const twitClient = new Twit({
-    consumer_key:process.env.twitterConsumerKey,
-    consumer_secret:process.env.twitterConsumerSecret,
-    access_token: process.env.twitterAccessToken,
-    access_token_secret: process.env.twitterAccessTokenSecret
-});
-
-const twitStream = twitClient.stream(`statuses/filter`, {follow:process.env.twitterIRLID});
-
-twitStream.on('tweet', function(tweet){
-    client.guilds.cache.first().channels.cache.filter(channel => channel.id === process.env.socialMdeiaChannel).fetch().then(channel =>{
-        channel.send(new MessageEmbed().setTitle(tweet.user).setDescription(tweet.text));
-    })
-});
-
-
-
- */
 
 
 

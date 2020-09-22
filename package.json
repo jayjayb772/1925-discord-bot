@@ -25,6 +25,7 @@
     "discord": "^0.8.2",
     "discord.js": "^12.1.1",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "fb": "^2.0.0",
     "file-api": "^0.10.4",
     "filereader": "^0.10.3",
@@ -32,11 +33,13 @@
     "node-emoji": "^1.10.0",
     "request": "latest",
     "requests": "^0.3.0",
+    "sockjs": "^0.3.21",
     "twit": "^2.2.11"
   },
   "devDependencies": {
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "sockjs-client": "^1.5.0"
   }
 }
