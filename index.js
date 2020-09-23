@@ -69,12 +69,9 @@ sock.onmessage = function(e) {
 };
 
 
-let recInterval = null;
 sock.onclose = function() {
     console.log('close')
-    recInterval = setInterval(function () {
         new_conn();
-    }, 2000);
 };
 
 
