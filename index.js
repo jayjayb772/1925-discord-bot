@@ -96,7 +96,7 @@ client.on('message', async (message) => {
         let from = (member.nickname.length > 0) ? member.nickname : message.author.username
         let ts = Date.now()
         let data = {
-            message:message.content,
+            message:message.content.toString(),
             from: from,
             ts:ts
         }
