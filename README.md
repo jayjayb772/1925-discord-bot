@@ -1,3 +1,26 @@
+## What is this?
+The discord bot for our discord server! it is also connected to the orchestrator using http requests, and using websockets
+
+## Where is it being hosted???
+Good try, I'm not putting the API link here, silly! You can host it yourself! I will make a list of required environment variables soon!
+I'm using digital ocean droplets though!
+
+
+## Why'd you do this?
+Because I never found a display board with enough customizability for me. Also I wanted to make a microservice based API on my own and I never really had the chance to learn react
+
+[Orchestrator](https://github.com/jayjayb772/Display-orchestrator)
+
+[CTAPI](https://github.com/jayjayb772/Display-CTAPI)
+
+[WeatherAPI](https://github.com/jayjayb772/Display-Weather)
+
+[DiscordBot](https://github.com/jayjayb772/1925-discord-bot)
+
+
+
+
+
 # discord-bot
 My second! discord bot. Written in Javascript with NodeJs and DiscordJs
 Has auto-moderation and sends flagged messages to managers set in the environment variables.
@@ -27,12 +50,6 @@ Command | Action | Optional Tags | Optional Tag functionality | Currently functi
 
 For comments, questions or suggestions please contact J B through discord or comment on this github repo.
 
-# Future plans
-This bot will live in my friend's and I's  discord server and handle most IRL related things. I'm working on gettting all listed commands functional. The ones that will take the longest are the machine and software commands due to the need to scrape info from the [IRL website](http://irl.depaul.edu/equipment-and-resources/) or type everything into a repeatable JSON file to easily have the bot send, most likely the latter.
-
-### Command Development Order
-1. Orchestrator Integration
-1. Texting specific orchestrator integration
 
 # Dev notes
 I'm working on learning the DiscordJs package and making discord bots. This is my first real discord bot project so it will take some time to work out bugs and get it to full functionality. I'm using **dotenv** for bot token and other api secrets storage to keep them off github and make switching between testing and production much simpler. The bot has Auto-moderator features that will flag messages with banned words and send a notification to managers.
