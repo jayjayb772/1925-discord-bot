@@ -9,6 +9,10 @@ I'm using digital ocean droplets though!
 ## Why'd you do this?
 Because I never found a display board with enough customizability for me. Also I wanted to make a microservice based API on my own and I never really had the chance to learn react
 
+## Links to all project code bases!
+
+[React App](https://github.com/jayjayb772/Display-ReactApp)
+
 [Orchestrator](https://github.com/jayjayb772/Display-orchestrator)
 
 [CTAPI](https://github.com/jayjayb772/Display-CTAPI)
@@ -17,6 +21,7 @@ Because I never found a display board with enough customizability for me. Also I
 
 [DiscordBot](https://github.com/jayjayb772/1925-discord-bot)
 
+---
 
 
 
