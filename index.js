@@ -46,7 +46,7 @@ client.on('guildMemberAdd', (member )=>{
 client.on('warn', function(info){
     console.log(info);
 })
-console.log(`${process.env.sockJsURL}`)
+
 
 
 let sock = new SockJS(`${process.env.sockJsURL}`);
@@ -92,9 +92,11 @@ client.on('message', async (message) => {
     }
 
     if(message.channel.id === process.env.DisplayChannel){
+        let member = message.guild.members.cache.filter(member => member.id === message.author.id).first()
+        let from = (member.nickname.length > 0) ? member.nickname : message.author.username
         let data = {
             message:message.content,
-            from:message.guild.members.cache.filter(member => member.id === message.author.id).first().nickname
+            from: from
         }
         sock.send(JSON.stringify(data))
         console.log('sent message')
