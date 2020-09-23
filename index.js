@@ -23,7 +23,7 @@ const {checkMessage} = require("./commands/src/automodFeatures");
 const client = new Client({
     disableEveryone: true
 });
-
+let curTime;
 
 
 
@@ -47,20 +47,37 @@ client.on('warn', function(info){
     console.log(info);
 })
 console.log(`${process.env.sockJsURL}`)
-const sock = new SockJS(`${process.env.sockJsURL}`);
+
+
+let sock = new SockJS(`${process.env.sockJsURL}`);
+
+
+let new_conn = function() {
+    console.log('Opening new con')
+    sock = new SockJS(`${process.env.sockJsURL}`);
+};
 console.log("opening")
 sock.onopen = function() {
     console.log('open');
     sock.send('test');
+    curTime = Date.now();
 };
 console.log('on message')
 sock.onmessage = function(e) {
     console.log('message', e.data);
+    curTime = Date.now();
 };
 
+
+let recInterval = null;
 sock.onclose = function() {
-    console.log('close');
+    console.log('close')
+    recInterval = setInterval(function () {
+        new_conn();
+    }, 2000);
 };
+
+
 
 
 client.on('message', async (message) => {
