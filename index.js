@@ -76,10 +76,11 @@ client.on('message', async (message) => {
 
     console.log(`channel id: ${message.channel.id}`)
     console.log(`display channel: ${process.env.DisplayChannel}`)
+    console.log(message.guild.members.cache.filter(member => member.id === message.author.id).first().nickname)
     if(message.channel.id === process.env.DisplayChannel){
         let data = {
             message:message.content,
-            from:message.author.tag
+            from:message.guild.members.cache.filter(member => member.id === message.author.id).first().nickname
         }
         sock.send(JSON.stringify(data))
         console.log('sent message')
