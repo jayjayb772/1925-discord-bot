@@ -74,9 +74,6 @@ client.on('message', async (message) => {
         console.log(`${message.author.username} said ${message.content}`);
     }
 
-    console.log(`channel id: ${message.channel.id}`)
-    console.log(`display channel: ${process.env.DisplayChannel}`)
-    console.log(message.guild.members.cache.filter(member => member.id === message.author.id).first().nickname)
     if(message.channel.id === process.env.DisplayChannel){
         let data = {
             message:message.content,
