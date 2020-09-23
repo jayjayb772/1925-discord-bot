@@ -94,9 +94,11 @@ client.on('message', async (message) => {
     if(message.channel.id === process.env.DisplayChannel){
         let member = message.guild.members.cache.filter(member => member.id === message.author.id).first()
         let from = (member.nickname.length > 0) ? member.nickname : message.author.username
+        let ts = Date.now()
         let data = {
             message:message.content,
-            from: from
+            from: from,
+            ts:ts
         }
         sock.send(JSON.stringify(data))
         console.log('sent message')
