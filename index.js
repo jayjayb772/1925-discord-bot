@@ -54,7 +54,7 @@ let sock = new SockJS(`${process.env.sockJsURL}`);
 
 let new_conn = function() {
     console.log('Opening new con')
-    sock = new SockJS(`${process.env.sockJsURL}`);
+    sock = new SockJS(`${process.env.sockJsURL}`, ['eventsource', 'htmlfile', 'jsonp-polling', 'websocket', 'websocket-raw', 'xhr-polling', 'xhr-streaming'], {heartbeat_delay:5000});
 };
 console.log("opening")
 sock.onopen = function() {
