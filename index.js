@@ -79,7 +79,7 @@ client.on('message', async (message) => {
     if(message.channel.id === process.env.DisplayChannel){
         let data = {
             message:message.content,
-            from:message.author.username
+            from:message.author.tag
         }
         sock.send(JSON.stringify(data))
         console.log('sent message')
