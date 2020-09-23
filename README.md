@@ -1,5 +1,5 @@
 ## What is this?
-The discord bot for our discord server
+The discord bot for our discord server! it is also connected to the orchestrator using http requests, and using websockets
 
 ## Where is it being hosted???
 Good try, I'm not putting the API link here, silly! You can host it yourself! I will make a list of required environment variables soon!
