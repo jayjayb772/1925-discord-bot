@@ -68,7 +68,6 @@ sock.onmessage = function(e) {
     curTime = Date.now();
 };
 
-
 sock.onclose = function() {
     console.log('close')
         new_conn();
