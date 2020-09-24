@@ -54,24 +54,30 @@ let sock = new SockJS(`${process.env.sockJsURL}`);
 
 let new_conn = function() {
     console.log('Opening new con')
-    sock = new SockJS(`${process.env.sockJsURL}`, ['eventsource', 'htmlfile', 'jsonp-polling', 'websocket', 'websocket-raw', 'xhr-polling', 'xhr-streaming'], {heartbeat_delay:5000});
-};
-console.log("opening")
-sock.onopen = function() {
-    console.log('open');
-    sock.send('test');
-    curTime = Date.now();
-};
-console.log('on message')
-sock.onmessage = function(e) {
-    console.log('message', e.data);
-    curTime = Date.now();
+    sock = new SockJS(`${process.env.sockJsURL}`);
+    console.log("opening")
+    sock.onopen = function() {
+        console.log('open');
+        sock.send('test');
+        curTime = Date.now();
+    };
+    console.log('on message')
+    sock.onmessage = function(e) {
+        console.log('message', e.data);
+        curTime = Date.now();
+    };
+
+    sock.onclose = function() {
+        console.log('close')
+        new_conn();
+    };
 };
 
-sock.onclose = function() {
-    console.log('close')
-        new_conn();
-};
+
+setInterval(()=>{
+    console.log("Stay alive")
+    sock.send("stay alive-discordBot");
+}, 15000)
 
 
 
@@ -87,14 +93,23 @@ client.on('message', async (message) => {
         console.log(`${message.author.username} said ${message.content}`);
     }
 
+    console.log(message.embeds.length)
     if(message.channel.id === process.env.DisplayChannel){
+        if(sock.readyState > 1){
+            console.log("alive")
+            new_conn()
+        }
         let member = message.guild.members.cache.filter(member => member.id === message.author.id).first()
         let from = (member.nickname) ? member.nickname : message.author.username
         let ts = Date.now()
+        let imageUrl = (message.embeds.length >0) ? message.embeds[0].url : null
         let data = {
             message:message.content.toString(),
             from: from,
-            ts:ts
+            ts:ts,
+            data:{
+                imageUrl: imageUrl
+            }
         }
         sock.send(JSON.stringify(data))
         console.log('sent message')
