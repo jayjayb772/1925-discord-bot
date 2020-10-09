@@ -80,6 +80,13 @@ setInterval(()=>{
 }, 15000)
 
 
+setInterval(()=>{
+    console.log("reset Conn")
+    sock.close()
+    new_conn()
+}, 60000*30)
+
+
 
 
 client.on('message', async (message) => {
