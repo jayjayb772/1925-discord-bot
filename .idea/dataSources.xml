@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="MariaDB - homeassistant@192.168.1.24" uuid="7eca61ab-9183-423d-b099-3a1eba25fc66">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://192.168.1.24:3306/homeassistant</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="MariaDB - homeassistant@192.168.1.24 [2]" uuid="f719ffc7-b842-4a4a-b280-6cb1c5cd0649">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://192.168.1.59:3306/homeassistant</jdbc-url>
+    </data-source>
+  </component>
+</project>

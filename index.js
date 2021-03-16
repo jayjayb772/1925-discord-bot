@@ -58,7 +58,6 @@ let new_conn = function() {
     console.log("opening")
     sock.onopen = function() {
         console.log('open');
-        sock.send('test');
         curTime = Date.now();
     };
     console.log('on message')
@@ -75,8 +74,13 @@ let new_conn = function() {
 
 
 setInterval(()=>{
+    try{
     console.log("Stay alive")
     sock.send("stay alive-discordBot");
+    }catch (InvalidStateError){
+        new_conn()
+        console.log("Stay alive new con")
+    }
 }, 15000)
 
 
